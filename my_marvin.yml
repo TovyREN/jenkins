@@ -16,7 +16,6 @@ jenkins:
         - id: nasso
           password: ${USER_NASSO_PASSWORD}
           name: Nassim
-  authorizationStrategy: RoleBasedAuthorizationStrategy
   authorizationStrategy:
     roleBased:
       roles:

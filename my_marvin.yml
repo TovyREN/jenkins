@@ -16,20 +16,6 @@ jenkins:
         - id: nasso
           password: ${USER_NASSO_PASSWORD}
           name: Nassim
-  authorizationStrategy: RoleBasedAuthorizationStrategy
-    roleBased:
-      roles:
-        global:
-          - name: "admin"
-            description: "Jenkins administrators"
-            permissions:
-              - "Overall/Administer"
-            assignments:
-              - "hugo"
-    globalMatrix:
-      permissions:
-        - "Overall/Administer:admin"
-        - "Overall/Read:anonymous"
 jobs:
   diskspace:
     - script: >

@@ -1,5 +1,10 @@
 jenkins:
   systemMessage: "Welcome to the Chocolatine-Powered Marvin Jenkins Instance."
+  env:
+    USER_CHOCOLATEEN_PASSWORD: chocolateen
+    USER_VAUGIE_G_PASSWORD: vaugie_g
+    USER_I_DONT_KNOW_PASSWORD: idk
+    USER_NASSO_PASSWORD: nasso
   securityRealm:
     local:
       allowsSignup: false
@@ -16,6 +21,7 @@ jenkins:
         - id: nasso
           password: ${USER_NASSO_PASSWORD}
           name: Nassim
+  authorizationStrategy: RoleBasedAuthorizationStrategy
   authorizationStrategy:
     roleBased:
       roles:
@@ -31,9 +37,18 @@ jenkins:
         - "Overall/Administer:admin"
         - "Overall/Read:anonymous"
 jobs:
-  - script: >
-      freeStyleJob('Disk Space Check') {
-        steps {
-          shell('df')
+  diskspace:
+    - script: >
+        freeStyleJob('Disk Space Check') {
+          steps {
+            shell('df')
+          }
         }
-      }
+  git:
+    installations:
+      - name: push
+        steps:
+      - run: make fclean
+      - run: make
+      - run: make tests_run
+      - run: make clean

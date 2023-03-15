@@ -1,0 +1,23 @@
+jenkins:
+  systemMessage: "Hello! Welcome to my Jenkins instance :)"
+  users:
+    - id: "jigglypuff"
+      fullName: "Jigglypuff"
+  jobs:
+    - script: >
+        freeStyleJob('Disk Space Check') {
+          steps {
+            shell('df')
+          }
+        }
+    - script: >
+        freeStyleJob('Daily Dose of Satisfaction') {
+          parameters {
+            stringParam('NAME', 'Blocus Périphérique')
+          }
+          steps {
+            sh('echo "Hello dear ${NAME}!"')
+            sh('date')
+            sh('echo "This is your DDoS number ${BUILD_NUMBER}."')
+          }
+        }

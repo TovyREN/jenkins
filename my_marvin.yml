@@ -1,10 +1,5 @@
 jenkins:
   systemMessage: "Welcome to the Chocolatine-Powered Marvin Jenkins Instance."
-  env:
-    USER_CHOCOLATEEN_PASSWORD: chocolateen
-    USER_VAUGIE_G_PASSWORD: vaugie_g
-    USER_I_DONT_KNOW_PASSWORD: idk
-    USER_NASSO_PASSWORD: nasso
   securityRealm:
     local:
       allowsSignup: false

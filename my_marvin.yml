@@ -1,31 +1,40 @@
 jenkins:
   systemMessage: "Welcome to the Chocolatine-Powered Marvin Jenkins Instance."
+  env:
+    USER_CHOCOLATEEN_PASSWORD: chocolateen
+    USER_VAUGIE_G_PASSWORD: vaugie_g
+    USER_I_DONT_KNOW_PASSWORD: idk
+    USER_NASSO_PASSWORD: nasso
   securityRealm:
     local:
       allowsSignup: false
       users:
         - id: chocolateen
+          password: ${USER_CHOCOLATEEN_PASSWORD}
           name: Hugo
         - id: vaugie_g
+          password: ${USER_VAUGIE_G_PASSWORD}
           name: Garance
         - id: i_dont_know
+          password: ${USER_I_DONT_KNOW_PASSWORD}
           name: Jeremy
         - id: nasso
+          password: ${USER_NASSO_PASSWORD}
           name: Nassim
-#  authorizationStrategy:
-#   roleBased:
-#      roles:
-#        global:
-#          - name: "admin"
-#            description: "Jenkins administrators"
-#            permissions:
-#              - "Overall/Administer"
-#            assignments:
-#              - "hugo"
-#    globalMatrix:
-#      permissions:
-#        - "Overall/Administer:admin"
-#        - "Overall/Read:anonymous"
+  authorizationStrategy: RoleBasedAuthorizationStrategy
+    roleBased:
+      roles:
+        global:
+          - name: "admin"
+            description: "Jenkins administrators"
+            permissions:
+              - "Overall/Administer"
+            assignments:
+              - "hugo"
+    globalMatrix:
+      permissions:
+        - "Overall/Administer:admin"
+        - "Overall/Read:anonymous"
 jobs:
   diskspace:
     - script: >
@@ -34,3 +43,11 @@ jobs:
             shell('df')
           }
         }
+  git:
+    installations:
+      - name: push
+        steps:
+      - run: make fclean
+      - run: make
+      - run: make tests_run
+      - run: make clean

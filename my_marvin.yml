@@ -38,11 +38,3 @@ jobs:
             shell('df')
           }
         }
-  git:
-    installations:
-      - name: push
-        steps:
-      - run: make fclean
-      - run: make
-      - run: make tests_run
-      - run: make clean
